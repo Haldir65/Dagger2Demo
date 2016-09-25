@@ -25,10 +25,6 @@ public class MainActivity extends AppCompatActivity {
     @Inject
     UserModel userModel;
 
-
-
-
-
     ActivityMainBinding binding;
 
     @Override

@@ -7,8 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.me.harris.dagger2demo.App;
 import com.me.harris.dagger2demo.R;
-import com.me.harris.dagger2demo.api.restService;
+import com.me.harris.dagger2demo.api.RestService;
 import com.me.harris.dagger2demo.databinding.ActivityDaggerBasicImageBinding;
+import com.me.harris.dagger2demo.injector.components.ActivityComponent;
+import com.me.harris.dagger2demo.injector.components.DaggerActivityComponent;
 import com.me.harris.dagger2demo.model.FuLi;
 import com.me.harris.dagger2demo.model.News;
 
@@ -33,14 +35,14 @@ public class DaggerBasicImageActivity extends AppCompatActivity {
     @Inject
     OkHttpClient client;
 
+    ActivityComponent mActivityComponent;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dagger_basic_image);
-        ((App) getApplication()).getmAppcomponent().inject(this);
-
-        restService service = retrofit.create(restService.class);
+        RestService service = retrofit.create(RestService.class);
         Call<FuLi> call = service.getFuli(10, 1);
         call.enqueue(new Callback<FuLi>() {
             @Override
@@ -60,4 +62,6 @@ public class DaggerBasicImageActivity extends AppCompatActivity {
 
 
     }
+
+
 }
