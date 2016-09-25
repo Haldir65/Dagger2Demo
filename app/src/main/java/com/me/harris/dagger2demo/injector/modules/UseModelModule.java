@@ -1,5 +1,7 @@
 package com.me.harris.dagger2demo.injector.modules;
 
+import com.me.harris.dagger2demo.model.UserModel;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -8,9 +10,10 @@ import dagger.Provides;
  */
 
 @Module
-public class ActivityModule {
+public class UseModelModule {
 
-   @Provides UserModel provideUserModle(){
+   @Provides
+   UserModel provideUserModel(){
         return new UserModel();
     }
 }

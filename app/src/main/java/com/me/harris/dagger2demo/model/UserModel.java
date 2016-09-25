@@ -1,4 +1,4 @@
-package com.me.harris.dagger2demo.injector.modules;
+package com.me.harris.dagger2demo.model;
 
 /**
  * Created by Fermi on 2016/9/25.
