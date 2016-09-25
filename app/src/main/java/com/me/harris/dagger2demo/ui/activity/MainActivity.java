@@ -1,4 +1,4 @@
-package com.me.harris.dagger2demo;
+package com.me.harris.dagger2demo.ui.activity;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -8,9 +8,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.me.harris.dagger2demo.R;
 import com.me.harris.dagger2demo.databinding.ActivityMainBinding;
+import com.me.harris.dagger2demo.injector.components.ActivityComponent;
+import com.me.harris.dagger2demo.injector.components.DaggerActivityComponent;
+import com.me.harris.dagger2demo.injector.modules.ActivityModule;
+import com.me.harris.dagger2demo.injector.modules.UserModel;
+
+import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ActivityComponent mActivityComponent;
+
+    @Inject
+    UserModel userModel;
 
     ActivityMainBinding binding;
 
@@ -18,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
+        mActivityComponent = DaggerActivityComponent.builder().activityModule(new ActivityModule()).build();
+        mActivityComponent.inject(this);
+
         setSupportActionBar(binding.toolbar);
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
@@ -28,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         // Example of a call to a native method
-        binding.included.sampleText.setText(stringFromJNI());
+        binding.included.sampleText.setText(" "+userModel.getName()+"\n"+userModel.getId()+"\n");
     }
 
     @Override
