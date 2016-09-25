@@ -59,9 +59,9 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.1.0' // RxAndroid
     compile 'io.reactivex:rxjava:1.1.0' // 推荐同时加载RxJava
 
-    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4' // Retrofit网络处理
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4' // Retrofit的rx解析库
-    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4' // Retrofit的gson库
+    compile 'com.squareup.retrofit2:retrofit:2.1.0' // Retrofit网络处理
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0' // Retrofit的rx解析库
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0' // Retrofit的gson库
 
     compile 'com.jakewharton:disklrucache:2.0.2'//缓存
 

@@ -7,19 +7,17 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.me.harris.dagger2demo.App;
 import com.me.harris.dagger2demo.R;
+import com.me.harris.dagger2demo.api.restService;
 import com.me.harris.dagger2demo.databinding.ActivityDaggerBasicImageBinding;
-import com.me.harris.dagger2demo.util.Constants;
-import com.me.harris.dagger2demo.util.LogUtil;
-
-import java.io.IOException;
+import com.me.harris.dagger2demo.model.FuLi;
+import com.me.harris.dagger2demo.model.News;
 
 import javax.inject.Inject;
 
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 /**
@@ -42,21 +40,24 @@ public class DaggerBasicImageActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dagger_basic_image);
         ((App) getApplication()).getmAppcomponent().inject(this);
 
-        Request request = new Request.Builder().
-                url(Constants.BASE_URL+"data/福利/10/1").build();
-        Call call = client.newCall(request);
-        call.enqueue(new Callback() {
+        restService service = retrofit.create(restService.class);
+        Call<FuLi> call = service.getFuli(10, 1);
+        call.enqueue(new Callback<FuLi>() {
             @Override
-            public void onFailure(Call call, IOException e) {
-
+            public void onResponse(Call<FuLi> call, Response<FuLi> response) {
+                FuLi fuLi = response.body();
+                News news = fuLi.getResults().get(3);
+                binding.setNews(news);
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                LogUtil.w(response.body().string());
+            public void onFailure(Call<FuLi> call, Throwable t) {
 
             }
         });
+
+
+
 
     }
 }

@@ -6,6 +6,8 @@ package com.me.harris.dagger2demo.util;
 
 public class Constants {
     public static final String BASE_URL = "http://gank.io/api/";
+    public static final String IMAGE_COMPRESSION = "?imageView2/0/w/100";
+
 
     public static class Config {
         public static final String CHARSET = "UTF-8";
