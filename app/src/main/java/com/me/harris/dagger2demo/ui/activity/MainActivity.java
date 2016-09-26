@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.me.harris.dagger2demo.App;
 import com.me.harris.dagger2demo.R;
 import com.me.harris.dagger2demo.databinding.ActivityMainBinding;
 import com.me.harris.dagger2demo.injector.components.ActivityComponent;
@@ -31,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-
         mActivityComponent = DaggerActivityComponent.builder().
                 useModelModule(new UseModelModule())
+                .appComponent(((App) getApplication()).getmAppcomponent())
                 .build();
         mActivityComponent.inject(this);
 
