@@ -7,13 +7,22 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.me.harris.dagger2demo.App;
 import com.me.harris.dagger2demo.R;
+import com.me.harris.dagger2demo.api.restService;
 import com.me.harris.dagger2demo.databinding.ActivityDaggerBasicImageBinding;
 import com.me.harris.dagger2demo.injector.components.ActivityComponent;
 import com.me.harris.dagger2demo.injector.components.DaggerActivityComponent;
 import com.me.harris.dagger2demo.injector.modules.UserModule;
+import com.me.harris.dagger2demo.model.FuLi;
+import com.me.harris.dagger2demo.model.News;
 import com.me.harris.dagger2demo.model.User;
+import com.me.harris.dagger2demo.util.LogUtil;
 
 import javax.inject.Inject;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * Created by Fermi on 2016/9/25.
@@ -27,6 +36,9 @@ public class DaggerBasicImageActivity extends AppCompatActivity {
     @Inject
     User client;
 
+    @Inject
+    Retrofit retrofit;
+
     ActivityComponent mActivityComponent;
 
 
@@ -39,7 +51,7 @@ public class DaggerBasicImageActivity extends AppCompatActivity {
                         userModule(new UserModule(new User(2,"Basic")))
                 .build();
         mActivityComponent.inject(this);
-       /* restService service = retrofit.create(restService.class);
+        restService service = retrofit.create(restService.class);
         Call<FuLi> call = service.getFuli(10, 1);
         call.enqueue(new Callback<FuLi>() {
             @Override
@@ -53,7 +65,8 @@ public class DaggerBasicImageActivity extends AppCompatActivity {
             public void onFailure(Call<FuLi> call, Throwable t) {
 
             }
-        });*/
+        });
+        LogUtil.w(client.getId() + "" + client.getName());
 
 
 
