@@ -32,8 +32,9 @@ public class App extends Application {
                 .apiModule(new ApiModule(Constants.BASE_URL))
                 .appModule(new AppModule(this))
                 .build();
-
-        LogUtil.e("OkHttpClient " + client);
+        LogUtil.w(" 注入之前 client " + client);
+        mAppcomponent.Inject(this);
+        LogUtil.w("注入之后 client "+client);
 
     }
 

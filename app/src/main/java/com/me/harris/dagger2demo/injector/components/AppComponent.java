@@ -3,6 +3,7 @@ package com.me.harris.dagger2demo.injector.components;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
+import com.me.harris.dagger2demo.App;
 import com.me.harris.dagger2demo.injector.modules.ApiModule;
 import com.me.harris.dagger2demo.injector.modules.AppModule;
 
@@ -28,6 +29,8 @@ public interface AppComponent {
     Cache getCahce();
 
     SharedPreferences getSharedPreference();
+
+    void Inject(App app);
 
 
 

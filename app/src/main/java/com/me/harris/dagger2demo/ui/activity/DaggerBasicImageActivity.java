@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.google.gson.Gson;
 import com.me.harris.dagger2demo.App;
 import com.me.harris.dagger2demo.R;
 import com.me.harris.dagger2demo.api.restService;
@@ -19,6 +20,7 @@ import com.me.harris.dagger2demo.util.LogUtil;
 
 import javax.inject.Inject;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,10 +36,16 @@ public class DaggerBasicImageActivity extends AppCompatActivity {
 
 
     @Inject
-    User client;
+    User user;
 
     @Inject
     Retrofit retrofit;
+
+    @Inject
+    Gson gson;
+
+    @Inject
+    OkHttpClient client;
 
     ActivityComponent mActivityComponent;
 
@@ -66,7 +74,7 @@ public class DaggerBasicImageActivity extends AppCompatActivity {
 
             }
         });
-        LogUtil.w(client.getId() + "" + client.getName());
+        LogUtil.w(user.getId() + "" + user.getName() + "\n" + " " + client + " " + gson);
 
 
 
