@@ -1,6 +1,6 @@
 package com.me.harris.dagger2demo.injector.components;
 
-import com.me.harris.dagger2demo.injector.modules.UseModelModule;
+import com.me.harris.dagger2demo.injector.modules.UserModule;
 import com.me.harris.dagger2demo.injector.scope.ActivityScope;
 import com.me.harris.dagger2demo.ui.activity.DaggerBasicImageActivity;
 import com.me.harris.dagger2demo.ui.activity.MainActivity;
@@ -13,7 +13,7 @@ import dagger.Component;
 
 
 @ActivityScope
-@Component(dependencies = AppComponent.class,modules = {UseModelModule.class})
+@Component(dependencies = AppComponent.class,modules = UserModule.class)
 public interface ActivityComponent {
     void inject(MainActivity activity);
 

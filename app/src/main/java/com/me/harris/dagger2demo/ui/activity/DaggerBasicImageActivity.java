@@ -10,7 +10,8 @@ import com.me.harris.dagger2demo.R;
 import com.me.harris.dagger2demo.databinding.ActivityDaggerBasicImageBinding;
 import com.me.harris.dagger2demo.injector.components.ActivityComponent;
 import com.me.harris.dagger2demo.injector.components.DaggerActivityComponent;
-import com.me.harris.dagger2demo.model.UserModel;
+import com.me.harris.dagger2demo.injector.modules.UserModule;
+import com.me.harris.dagger2demo.model.User;
 
 import javax.inject.Inject;
 
@@ -24,7 +25,7 @@ public class DaggerBasicImageActivity extends AppCompatActivity {
 
 
     @Inject
-    UserModel client;
+    User client;
 
     ActivityComponent mActivityComponent;
 
@@ -34,7 +35,8 @@ public class DaggerBasicImageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dagger_basic_image);
         mActivityComponent = DaggerActivityComponent.builder()
-                .appComponent(((App) getApplication()).getmAppcomponent())
+                .appComponent(((App) getApplication()).getmAppcomponent()).
+                        userModule(new UserModule(new User(2,"Basic")))
                 .build();
         mActivityComponent.inject(this);
        /* restService service = retrofit.create(restService.class);

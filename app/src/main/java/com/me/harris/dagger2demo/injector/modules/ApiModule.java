@@ -1,8 +1,6 @@
 package com.me.harris.dagger2demo.injector.modules;
 
 import android.app.Application;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -29,11 +27,6 @@ public class ApiModule {
         this.mBaseUrl = mBaseUrl;
     }
 
-    @Provides
-    @Singleton
-    SharedPreferences providesSharedPreference(Application application) {
-        return PreferenceManager.getDefaultSharedPreferences(application);
-    }
 
     @Provides
     @Singleton

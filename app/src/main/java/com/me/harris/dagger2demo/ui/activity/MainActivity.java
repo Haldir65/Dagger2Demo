@@ -13,8 +13,8 @@ import com.me.harris.dagger2demo.R;
 import com.me.harris.dagger2demo.databinding.ActivityMainBinding;
 import com.me.harris.dagger2demo.injector.components.ActivityComponent;
 import com.me.harris.dagger2demo.injector.components.DaggerActivityComponent;
-import com.me.harris.dagger2demo.injector.modules.UseModelModule;
-import com.me.harris.dagger2demo.model.UserModel;
+import com.me.harris.dagger2demo.injector.modules.UserModule;
+import com.me.harris.dagger2demo.model.User;
 
 import javax.inject.Inject;
 
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Inject
-    UserModel userModel;
+    User user;
 
     ActivityMainBinding binding;
 
@@ -32,10 +32,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        mActivityComponent = DaggerActivityComponent.builder().
-                useModelModule(new UseModelModule())
-                .appComponent(((App) getApplication()).getmAppcomponent())
+        mActivityComponent = DaggerActivityComponent.builder()
+                .appComponent(((App) getApplication()).getmAppcomponent()).
+                        userModule(new UserModule(new User(1,"Main")))
                 .build();
+
         mActivityComponent.inject(this);
 
 
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         // Example of a call to a native method
-        binding.included.sampleText.setText(" " + userModel.getName() + "\n" + userModel.getId() + "\n");
+        binding.included.sampleText.setText(" " + user.getName() + "\n" + user.getId() + "\n");
     }
 
     @Override

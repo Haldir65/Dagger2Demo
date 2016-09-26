@@ -32,7 +32,7 @@ public class App extends Application {
                 .apiModule(new ApiModule(Constants.BASE_URL))
                 .appModule(new AppModule(this))
                 .build();
-        mAppcomponent.inject(this);
+
         LogUtil.e("OkHttpClient " + client);
 
     }
