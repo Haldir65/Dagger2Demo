@@ -1,11 +1,16 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "25.0.3"
     dataBinding {
         enabled = true
+    }
+
+    repositories {
+        maven {
+            url 'https://maven.google.com'
+        }
     }
     defaultConfig {
         applicationId "com.me.harris.dagger2demo"
@@ -14,11 +19,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        externalNativeBuild {
-            cmake {
-                cppFlags ""
-            }
-        }
+
     }
     buildTypes {
         release {
@@ -26,47 +27,43 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    externalNativeBuild {
-        cmake {
-            path "CMakeLists.txt"
-        }
-    }
+
 }
 
 ext {
-    supportLibVersion = "25.1.0"
+    supportLibVersion = "25.3.0"
 }
 
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    implementation "com.android.support:appcompat-v7:${supportLibVersion}"
+    implementation "com.android.support:cardview-v7:${supportLibVersion}"
+    implementation "com.android.support:design:${supportLibVersion}"
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.github.bumptech.glide:glide:3.8.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.8.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.1.2'
+    implementation 'com.google.code.gson:gson:2.8.0'
 
-    compile "com.android.support:appcompat-v7:${supportLibVersion}"
-    compile "com.android.support:cardview-v7:${supportLibVersion}"
-    compile "com.android.support:design:${supportLibVersion}"
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha4'
 
-
-
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.squareup.okhttp3:okhttp:3.1.2'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.1.2'
-    compile 'com.google.code.gson:gson:2.6.2'
-
-    compile 'io.reactivex:rxandroid:1.1.0' // RxAndroid
-    compile 'io.reactivex:rxjava:1.1.0' // 推荐同时加载RxJava
-
-    compile 'com.squareup.retrofit2:retrofit:2.1.0' // Retrofit网络处理
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0' // Retrofit的rx解析库
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0' // Retrofit的gson库
-
-    compile 'com.jakewharton:disklrucache:2.0.2'//缓存
-
-    compile 'com.google.dagger:dagger:2.0'
-    provided 'com.google.dagger:dagger-compiler:2.0'
+    // RxAndroid
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation "io.reactivex.rxjava2:rxjava:2.1.0"
+    // 推荐同时加载RxJava
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    // Retrofit网络处理
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    // Retrofit的rx解析库
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    // Retrofit的gson库
+    implementation 'com.jakewharton:disklrucache:2.0.2'
+    //缓存
+    implementation 'com.google.dagger:dagger:2.6'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.6'
     provided 'org.glassfish:javax.annotation:10.0-b28'
     testCompile 'junit:junit:4.12'
 }
