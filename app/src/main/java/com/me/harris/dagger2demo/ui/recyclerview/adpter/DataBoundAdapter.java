@@ -20,7 +20,7 @@ import android.databinding.ViewDataBinding;
 import android.support.annotation.LayoutRes;
 
 /**
- * An Adapter implementation that works with a {@link com.me.harris.ganstuff.ui.recyclerView.viewholder.DataBoundViewHolder}.
+ * An Adapter implementation that works with a {@link com.me.harris.dagger2demo.ui.recyclerview.viewholder.DataBoundViewHolder}.
  * <p>
  * Although this version enforces a single item type, it can easily be extended to support multiple
  * view types.

@@ -1,30 +1,19 @@
 package com.me.harris.dagger2demo.ui.activity;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.me.harris.dagger2demo.App;
 import com.me.harris.dagger2demo.R;
 import com.me.harris.dagger2demo.databinding.ActivityMainBinding;
-import com.me.harris.dagger2demo.injector.components.ActivityComponent;
-import com.me.harris.dagger2demo.injector.components.DaggerActivityComponent;
-import com.me.harris.dagger2demo.injector.modules.UserModule;
-import com.me.harris.dagger2demo.model.User;
-
-import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityComponent mActivityComponent;
 
-
-    @Inject
-    User user;
 
     ActivityMainBinding binding;
 
@@ -32,12 +21,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        mActivityComponent = DaggerActivityComponent.builder()
-                .appComponent(((App) getApplication()).getmAppcomponent()).
-                        userModule(new UserModule(new User(1,"Main")))
-                .build();
 
-        mActivityComponent.inject(this);
 
 
         setSupportActionBar(binding.toolbar);
@@ -45,14 +29,12 @@ public class MainActivity extends AppCompatActivity {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
-                Intent intent = new Intent(MainActivity.this, DaggerBasicImageActivity.class);
-                startActivity(intent);
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
             }
         });
-        // Example of a call to a native method
-        binding.included.sampleText.setText(" " + user.getName() + "\n" + user.getId() + "\n");
+
     }
 
     @Override
