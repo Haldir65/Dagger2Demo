@@ -43,6 +43,7 @@ android {
 
 ext {
     supportLibVersion = "26.0.2"
+    daggerVersion = "2.12"
 }
 
 
@@ -56,14 +57,14 @@ dependencies {
     implementation "com.android.support:design:${supportLibVersion}"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.github.bumptech.glide:glide:3.8.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.8.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.1.2'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.3.1'
     implementation 'com.google.code.gson:gson:2.8.0'
 
 
     // RxAndroid
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    implementation "io.reactivex.rxjava2:rxjava:2.1.0"
+    implementation "io.reactivex.rxjava2:rxjava:2.1.7"
     // 推荐同时加载RxJava
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     // Retrofit网络处理
@@ -73,8 +74,8 @@ dependencies {
     // Retrofit的gson库
     implementation 'com.jakewharton:disklrucache:2.0.2'
     //缓存
-    implementation 'com.google.dagger:dagger:2.6'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.6'
+    implementation "com.google.dagger:dagger:${daggerVersion}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${daggerVersion}"
     compileOnly 'org.glassfish:javax.annotation:10.0-b28'
     testImplementation 'junit:junit:4.12'
 }
