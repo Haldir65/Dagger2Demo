@@ -1,4 +1,4 @@
-package com.me.harris.dagger2demo.ui.activity;
+package com.me.harris.dagger2demo.injector.modules;
 
 import javax.inject.Inject;
 

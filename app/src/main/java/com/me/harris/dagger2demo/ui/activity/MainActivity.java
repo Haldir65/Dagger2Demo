@@ -10,6 +10,16 @@ import android.view.View;
 
 import com.me.harris.dagger2demo.R;
 import com.me.harris.dagger2demo.databinding.ActivityMainBinding;
+import com.me.harris.dagger2demo.injector.components.DaggerHttpComponent;
+import com.me.harris.dagger2demo.injector.components.DaggerMainActivityComponent;
+import com.me.harris.dagger2demo.injector.components.HttpComponent;
+import com.me.harris.dagger2demo.injector.components.MainActivityComponent;
+import com.me.harris.dagger2demo.model.User;
+import com.me.harris.dagger2demo.util.LogUtil;
+
+import javax.inject.Inject;
+
+import okhttp3.OkHttpClient;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,10 +27,14 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        injectUser();
+        injectThirdPartyLibrary();
 
 
 
@@ -37,6 +51,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Inject
+    OkHttpClient client;
+
+    @Inject
+    User mUser;
+
+    private void injectThirdPartyLibrary() {
+        HttpComponent component = DaggerHttpComponent.builder().build();
+        component.Inject(this);
+        if (client != null) {
+            System.out.println("we have an valid Client");
+        }
+
+    }
+
+    void injectUser() {
+        HttpComponent http = DaggerHttpComponent.builder().build();
+
+        MainActivityComponent component = DaggerMainActivityComponent.builder().httpComponent(http).build();
+
+        component.inject(this);
+
+        LogUtil.e(String.valueOf(mUser.hashCode()));
+        User user = component.user();
+        LogUtil.e(String.valueOf(user.hashCode()));
     }
 
     @Override

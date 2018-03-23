@@ -6,6 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
 import com.me.harris.dagger2demo.R;
+import com.me.harris.dagger2demo.injector.components.CustomerComponet;
+import com.me.harris.dagger2demo.injector.components.DaggerCustomerComponet;
+import com.me.harris.dagger2demo.injector.modules.CustomerModule;
+import com.me.harris.dagger2demo.model.Customer;
 
 import javax.inject.Inject;
 
